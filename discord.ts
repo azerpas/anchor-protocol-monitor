@@ -1,5 +1,5 @@
 interface DiscordProps {
-    balance: number;
+    balance: string;
 }
 
 export const sendWebhook = async (props: DiscordProps) => {
@@ -12,7 +12,7 @@ export const sendWebhook = async (props: DiscordProps) => {
                 "title": "BALANCE UPDATE 💰", "color": 7340287,
                 "fields": [
                     {
-                        "name": "Balance","value": `${props.balance.toString()} aUST`,"inline": true
+                        "name": "Balance","value": `${props.balance} aUST`,"inline": true
                     },
                 ],
                 "footer": {  "text": "Anchor Protocol" }, "timestamp": new Date().toISOString()

@@ -1,6 +1,7 @@
 import { Lambda } from 'aws-sdk';
 import { APIGatewayEvent } from 'aws-lambda';
 import { sendWebhook } from './discord';
+import { getTotalDeposit } from './terra';
 
 
 export const handler = async (event: APIGatewayEvent) => {
@@ -9,6 +10,7 @@ export const handler = async (event: APIGatewayEvent) => {
     if(!process.env.ACCESS_KEY || !process.env.SECRET_KEY) throw new Error(`Undefined .env value: '${process.env.SECRET_KEY}' '${process.env.ACCESS_KEY}'`);
     if(!process.env.TERRA_ADDR) throw new Error(`Undefined .env value: 'TERRA_ADDR'`);
     if(!process.env.WEBHOOK) throw new Error(`Undefined .env value: 'WEBHOOK'`);
+    const balance = await getTotalDeposit();
     const params = {
       FunctionName: arn, 
       MemorySize: 256,
@@ -19,7 +21,7 @@ export const handler = async (event: APIGatewayEvent) => {
           'SECRET_KEY': process.env.SECRET_KEY,
           'ARN': arn,
           'TERRA_ADDR': process.env.TERRA_ADDR,
-          'LAST_BALANCE': '0',
+          'LAST_BALANCE': balance,
           'WEBHOOK': process.env.WEBHOOK
         }
       }
@@ -27,7 +29,7 @@ export const handler = async (event: APIGatewayEvent) => {
     const lambda = new Lambda({accessKeyId: process.env.ACCESS_KEY, secretAccessKey: process.env.SECRET_KEY,region: 'eu-west-3'});
     const data = await lambda.updateFunctionConfiguration(params).promise();
     console.info(data);
-    await sendWebhook({balance: 3240})
+    await sendWebhook({balance: balance})
     return {
         statusCode: 200,
         body: {env: process.env.AWS_EXECUTION_ENV, els: 'he'},
