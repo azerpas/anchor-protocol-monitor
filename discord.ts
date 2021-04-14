@@ -13,7 +13,7 @@ export const sendWebhook = async (props: DiscordProps) => {
     const change = (parseFloat(props.balance) / parseFloat(props.lastBalance)) * 100;
     console.info(`Change: ${change}`);
     const data = JSON.stringify({
-        "content": `${process.env.ROLE ? `<@${process.env.ROLE}>` : ''}`,
+        "content": `${process.env.ROLE ? `<@${process.env.ROLE}> ${props.balance} aUST` : ''}`,
         "embeds": [
             {
                 "title": "BALANCE UPDATE 💰", "color": 7340287,
