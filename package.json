@@ -17,9 +17,11 @@
     "@terra-money/terra.js": "^1.6.0",
     "aws-lambda": "^1.0.6",
     "aws-sdk": "^2.887.0",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.75"
+    "@types/aws-lambda": "^8.10.75",
+    "@types/node-fetch": "^2.5.10"
   }
 }

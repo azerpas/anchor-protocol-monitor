@@ -10,6 +10,8 @@ export const handler = async (event: APIGatewayEvent) => {
     if(!process.env.ACCESS_KEY || !process.env.SECRET_KEY) throw new Error(`Undefined .env value: '${process.env.SECRET_KEY}' '${process.env.ACCESS_KEY}'`);
     if(!process.env.TERRA_ADDR) throw new Error(`Undefined .env value: 'TERRA_ADDR'`);
     if(!process.env.WEBHOOK) throw new Error(`Undefined .env value: 'WEBHOOK'`);
+    if(!process.env.LAST_BALANCE) throw new Error(`Undefined .env value: 'LAST_BALANCE'`);
+    const lastBalance = parseFloat(process.env.LAST_BALANCE);
     console.log(`Getting deposit...`);
     const balance = await getTotalDeposit();
     console.log(`Deposit ${balance}`);
@@ -32,7 +34,7 @@ export const handler = async (event: APIGatewayEvent) => {
     const data = await lambda.updateFunctionConfiguration(params).promise();
     console.info(data);
     console.log(`Sending balance...`);
-    await sendWebhook({balance: balance});
+    await sendWebhook({balance: balance, lastBalance: lastBalance.toString()});
     console.log(`Sent balance!`);
     return {
         statusCode: 200,
