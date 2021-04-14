@@ -26,7 +26,8 @@ export const handler = async (event: APIGatewayEvent) => {
           'ARN': arn,
           'TERRA_ADDR': process.env.TERRA_ADDR,
           'LAST_BALANCE': balance,
-          'WEBHOOK': process.env.WEBHOOK
+          'WEBHOOK': process.env.WEBHOOK,
+          'ROLE': process.env.ROLE ? (process.env.ROLE !== '' ? process.env.ROLE : '') : ''
         }
       }
     };
