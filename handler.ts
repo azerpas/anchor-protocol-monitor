@@ -10,7 +10,9 @@ export const handler = async (event: APIGatewayEvent) => {
     if(!process.env.ACCESS_KEY || !process.env.SECRET_KEY) throw new Error(`Undefined .env value: '${process.env.SECRET_KEY}' '${process.env.ACCESS_KEY}'`);
     if(!process.env.TERRA_ADDR) throw new Error(`Undefined .env value: 'TERRA_ADDR'`);
     if(!process.env.WEBHOOK) throw new Error(`Undefined .env value: 'WEBHOOK'`);
+    console.log(`Getting deposit...`);
     const balance = await getTotalDeposit();
+    console.log(`Deposit ${balance}`);
     const params = {
       FunctionName: arn, 
       MemorySize: 256,
@@ -29,7 +31,9 @@ export const handler = async (event: APIGatewayEvent) => {
     const lambda = new Lambda({accessKeyId: process.env.ACCESS_KEY, secretAccessKey: process.env.SECRET_KEY,region: 'eu-west-3'});
     const data = await lambda.updateFunctionConfiguration(params).promise();
     console.info(data);
-    await sendWebhook({balance: balance})
+    console.log(`Sending balance...`);
+    await sendWebhook({balance: balance});
+    console.log(`Sent balance!`);
     return {
         statusCode: 200,
         body: {env: process.env.AWS_EXECUTION_ENV, els: 'he'},
