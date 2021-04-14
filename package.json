@@ -1,0 +1,25 @@
+{
+  "name": "terra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "index": "tsc && node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lambda": "npm run build && cp -r ./node_modules dist && cd dist && zip -qq -r ./dist.zip . && mv dist.zip .."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anchor-protocol/anchor.js": "^1.0.0",
+    "@terra-money/terra.js": "^1.6.0",
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.887.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.75"
+  }
+}
