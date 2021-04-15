@@ -21,6 +21,7 @@ I personnally run the whole process through a Lambda microservice.
 - `npm i && npm run lambda`
 - Drag and drop `dist.zip` to a AWS Lambda NodeJS 14.x function
 - Define the environnemental variables like the ones inside `.env.template`
+- Change the "Handler" inside the Runtime Settings to `handler.handler` instead of the default `index.handler` 
 #### B. Use Github actions
 - Create a AWS Lambda NodeJS 14.x function
 - Define the environnemental variables like the ones inside `.env.template`
