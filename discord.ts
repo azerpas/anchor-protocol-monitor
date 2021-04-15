@@ -28,7 +28,7 @@ export const sendWebhook = async (props: DiscordProps) => {
                         "name": "Difference ➖","value": `+${diff.toFixed(5)} aUST`,"inline": true
                     },
                     {
-                        "name": "Change 📈","value": `${diff.toFixed(2)}%`,"inline": true
+                        "name": "Change 📈","value": `${change.toFixed(2)}%`,"inline": true
                     },
                 ],
                 "footer": {  "text": "Anchor Protocol" }, "timestamp": new Date().toISOString()
