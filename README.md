@@ -2,6 +2,7 @@
 
 Using [anchor.js](https://github.com/Anchor-Protocol/anchor.js) and [terra.js](https://github.com/terra-project/terra.js) to fetch the total deposit amount of UST in the Anchor Protocol, avoiding the constant check of the [web app](https://app.anchorprotocol.com/earn) and get a daily update on your savings.    
 ![webapp](https://user-images.githubusercontent.com/19282069/114839725-664fcc80-9dd6-11eb-957b-03d0c7ecbbda.png)
+![webhook](https://user-images.githubusercontent.com/19282069/114916061-a6d63700-9e24-11eb-971e-71d9409e62ca.png)
 
 ## How it works
 You can use the functions inside `terra.ts` to run the script locally through `index.ts` or a custom script.    
