@@ -33,5 +33,5 @@ I personnally run the whole process through a Lambda microservice.
 ### 2. CRON the function
 - Use CloudWatch Event to CRON the function
 
-
-
+## TODO
+- [ ] Add a initial base deposit in Discord
