@@ -10,7 +10,7 @@ export const sendWebhook = async (props: DiscordProps) => {
     if(!webhook) throw new Error(`Undefined .env value: 'WEBHOOK'`);
     const diff = parseFloat(props.balance) - parseFloat(props.lastBalance);
     console.info(`Difference: ${diff}`);
-    const change = (parseFloat(props.balance) / parseFloat(props.lastBalance)) * 100;
+    const change = ((parseFloat(props.balance)-parseFloat(props.lastBalance)) / Math.abs(parseFloat(props.lastBalance))) * 100;
     console.info(`Change: ${change}`);
     const data = JSON.stringify({
         "content": `${process.env.ROLE ? `<@${process.env.ROLE}> ${props.balance} aUST` : ''}`,
@@ -19,10 +19,10 @@ export const sendWebhook = async (props: DiscordProps) => {
                 "title": "BALANCE UPDATE 💰", "color": 7340287,
                 "fields": [
                     {
-                        "name": "Balance","value": `${props.balance} aUST`,"inline": true
+                        "name": "Current balance","value": `${props.balance} aUST`,"inline": true
                     },
                     {
-                        "name": "Yesterday 🗓","value": `${props.lastBalance} aUST`,"inline": true
+                        "name": "Last balance 🗓","value": `${props.lastBalance} aUST`,"inline": true
                     },
                     {
                         "name": "Difference ➖","value": `+${diff.toFixed(5)} aUST`,"inline": true
