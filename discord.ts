@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 interface DiscordProps {
     balance: string;
     lastBalance: string;
+    apy: number;
 }
 
 export const sendWebhook = async (props: DiscordProps) => {
@@ -29,6 +30,9 @@ export const sendWebhook = async (props: DiscordProps) => {
                     },
                     {
                         "name": "Change 📈","value": `${change.toFixed(2)}%`,"inline": true
+                    },
+                    {
+                        "name": "Current APY","value": `${props.apy * 100}%`,"inline": true
                     },
                 ],
                 "footer": {  "text": "Anchor Protocol" }, "timestamp": new Date().toISOString()

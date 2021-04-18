@@ -1,6 +1,7 @@
 import { Anchor, columbus4, AddressProviderFromJson, MARKET_DENOMS, OperationGasParameters } from "@anchor-protocol/anchor.js";
 import { LCDClient, Dec, Int } from "@terra-money/terra.js";
 import { config } from "dotenv";
+import { getCurrentApy } from "./terra";
 
 config();
 
@@ -36,4 +37,6 @@ console.log(`Checking address : ${process.env.TERRA_ADDR}`);
         .div(1000000)
         .toString();
     console.log(deposit);
+    const apy = await getCurrentApy();
+    console.info(`Current APY: ${(apy * 100).toFixed(2)}`);
 })();

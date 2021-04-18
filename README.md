@@ -37,4 +37,4 @@ I personnally run the whole process through a Lambda microservice.
 
 ## TODO
 - [ ] Add a initial base deposit in Discord
-- [ ] Return current APY
+- [X] Return current APY

@@ -1,7 +1,7 @@
 import { Lambda } from 'aws-sdk';
 import { APIGatewayEvent } from 'aws-lambda';
 import { sendWebhook } from './discord';
-import { getTotalDeposit } from './terra';
+import { getCurrentApy, getTotalDeposit } from './terra';
 
 
 export const handler = async (event: APIGatewayEvent) => {
@@ -15,6 +15,7 @@ export const handler = async (event: APIGatewayEvent) => {
     console.log(`Getting deposit...`);
     const balance = await getTotalDeposit();
     console.log(`Deposit ${balance}`);
+    const apy = await getCurrentApy();
     const params = {
       FunctionName: arn, 
       MemorySize: 256,
@@ -35,7 +36,7 @@ export const handler = async (event: APIGatewayEvent) => {
     const data = await lambda.updateFunctionConfiguration(params).promise();
     console.info(data);
     console.log(`Sending balance...`);
-    await sendWebhook({balance: balance, lastBalance: lastBalance.toString()});
+    await sendWebhook({balance, lastBalance: lastBalance.toString(), apy});
     console.log(`Sent balance!`);
     return {
         statusCode: 200,

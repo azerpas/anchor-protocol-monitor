@@ -1,10 +1,10 @@
-import { Anchor, columbus4, AddressProviderFromJson, MARKET_DENOMS, OperationGasParameters } from "@anchor-protocol/anchor.js";
+import { Anchor, columbus4, AddressProviderFromJson, MARKET_DENOMS, OperationGasParameters, Earn } from "@anchor-protocol/anchor.js";
 import { LCDClient, Dec, Int } from "@terra-money/terra.js";
 
 export const getTotalDeposit = async () => {
     const myAddress = process.env.TERRA_ADDR;
     if(!myAddress) throw new Error(`Undefined .env value: 'TERRA_ADDR'`)
-    const market = "uusd";
+    const market = MARKET_DENOMS.UUSD;
     const addressProvider = new AddressProviderFromJson(columbus4);
     const lcd = new LCDClient({ URL: 'https://lcd.terra.dev', chainID: 'columbus-4' });
     //@ts-ignore
@@ -22,15 +22,22 @@ export const getContract = async (props: {lcd: LCDClient, marketContractAddress:
     const {exchange_rate, aterra_supply}: EpochStateResponse = await lcd.wasm.contractQuery(
         marketContractAddress,
         {
-          epoch_state: {
-            block_height: undefined,
-          },
+            epoch_state: {
+                block_height: undefined,
+            },
         },
     );
     const {balance} = await lcd.wasm.contractQuery(tokenAddress, { balance: { address: myAddress } });
     const deposit = new Dec(exchange_rate).mul(balance);
     console.info(deposit);
     return deposit;
+}
+
+export const getCurrentApy = async () => {
+    const lcd = new LCDClient({ URL: 'https://lcd.terra.dev', chainID: 'columbus-4' });
+    const addressProvider = new AddressProviderFromJson(columbus4);
+    const earn = new Earn(lcd, addressProvider);
+    return earn.getAPY({market: MARKET_DENOMS.UUSD});
 }
 
 interface EpochStateResponse {
