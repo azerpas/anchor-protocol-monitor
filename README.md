@@ -34,6 +34,8 @@ I personnally run the whole process through a Lambda microservice.
     - `FUNCTION_NAME`: the AWS Lambda func name
 ### 2. CRON the function
 - Use CloudWatch Event to CRON the function
+- `cron(0 12 * * ? *)` to execute the function everyday at 12:00pm    
+![AWS_Screenshot](https://user-images.githubusercontent.com/19282069/115397779-c08dca80-a1e6-11eb-8d6c-a3260266618f.png)
 
 ## TODO
 - [ ] Add a initial base deposit in Discord
