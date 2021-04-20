@@ -1,9 +1,7 @@
 import { Anchor, columbus4, AddressProviderFromJson, MARKET_DENOMS, OperationGasParameters } from "@anchor-protocol/anchor.js";
 import { LCDClient, Dec, Int } from "@terra-money/terra.js";
-import { config } from "dotenv";
+import "dotenv/config";
 import { getCurrentApy } from "./terra";
-
-config();
 
 interface EpochStateResponse {
     exchange_rate: string;

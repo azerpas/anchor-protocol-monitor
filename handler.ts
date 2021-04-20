@@ -1,8 +1,8 @@
+import 'dotenv/config';
 import { Lambda } from 'aws-sdk';
 import { APIGatewayEvent } from 'aws-lambda';
 import { sendWebhook } from './discord';
 import { getCurrentApy, getTotalDeposit } from './terra';
-
 
 export const handler = async (event: APIGatewayEvent) => {
     const arn = process.env.ARN;
