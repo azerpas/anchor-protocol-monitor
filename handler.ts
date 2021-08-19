@@ -28,7 +28,8 @@ export const handler = async (event: APIGatewayEvent) => {
           'TERRA_ADDR': process.env.TERRA_ADDR,
           'LAST_BALANCE': balance,
           'WEBHOOK': process.env.WEBHOOK,
-          'ROLE': process.env.ROLE ? (process.env.ROLE !== '' ? process.env.ROLE : '') : ''
+          'ROLE': process.env.ROLE ? (process.env.ROLE !== '' ? process.env.ROLE : '') : '',
+          'FIRST_BALANCE': process.env.FIRST_BALANCE ? process.env.FIRST_BALANCE : balance
         }
       }
     };

@@ -13,6 +13,8 @@ export const sendWebhook = async (props: DiscordProps) => {
     console.info(`Difference: ${diff}`);
     const change = ((parseFloat(props.balance)-parseFloat(props.lastBalance)) / Math.abs(parseFloat(props.lastBalance))) * 100;
     console.info(`Change: ${change}`);
+    const apy = (props.apy * 100).toFixed(2)
+    let base: number | string | undefined = process.env.FIRST_BALANCE;
     const data = JSON.stringify({
         "content": `${process.env.ROLE ? `<@${process.env.ROLE}> ${props.balance} UST` : ''}`,
         "embeds": [
@@ -32,7 +34,10 @@ export const sendWebhook = async (props: DiscordProps) => {
                         "name": "Change 📈","value": `${change.toFixed(2)}%`,"inline": true
                     },
                     {
-                        "name": "Current APY","value": `${props.apy * 100}%`,"inline": true
+                        "name": "Current APY","value": `${apy}%`,"inline": true
+                    },
+                    {
+                        "name": "Gains","value": `+${base ? parseFloat(props.balance) - parseFloat(base) : "?"} UST`,"inline": true
                     },
                 ],
                 "footer": {  "text": "Anchor Protocol" }, "timestamp": new Date().toISOString()
