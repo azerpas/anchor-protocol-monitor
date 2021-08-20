@@ -38,5 +38,5 @@ I personnally run the whole process through a Lambda microservice.
 ![AWS_Screenshot](https://user-images.githubusercontent.com/19282069/115397779-c08dca80-a1e6-11eb-8d6c-a3260266618f.png)
 
 ## TODO
-- [ ] Add a initial base deposit in Discord
+- [X] Add a initial base deposit in Discord
 - [X] Return current APY
