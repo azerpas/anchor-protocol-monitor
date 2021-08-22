@@ -37,7 +37,7 @@ export const sendWebhook = async (props: DiscordProps) => {
                         "name": "Current APY","value": `${apy}%`,"inline": true
                     },
                     {
-                        "name": "Gains","value": `+${base ? parseFloat(props.balance) - parseFloat(base) : "?"} UST`,"inline": true
+                        "name": "Gains","value": `+${base ? (parseFloat(props.balance) - parseFloat(base)).toFixed(2) : "?"} UST`,"inline": true
                     },
                 ],
                 "footer": {  "text": "Anchor Protocol" }, "timestamp": new Date().toISOString()
